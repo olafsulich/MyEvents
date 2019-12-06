@@ -8,7 +8,7 @@ I want to develop my ES6+ skills, and get fun with some API.
 
 ## Screenshots
 
-![Design](hhttps://i.ibb.co/VVMbvB1/screeen-12.png)
+![Design](https://i.ibb.co/VVMbvB1/screeen-12.png)
 
 ## Tech/framework used
 
