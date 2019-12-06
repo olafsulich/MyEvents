@@ -1,16 +1,16 @@
-## Project title
+## Project title 🚀
 
 Javscript app, based on EventBrite API.
 
-## Motivation
+## Motivation 🎉
 
 I want to develop my ES6+ skills, and get fun with some API.
 
-## Screenshots
+## Screenshots 📺
 
 ![Design](https://i.ibb.co/VVMbvB1/screeen-12.png)
 
-## Tech/framework used
+## Tech/framework used 🔧
 
 - HTML5
 - SCSS
@@ -19,16 +19,20 @@ I want to develop my ES6+ skills, and get fun with some API.
 - [Webpack](https://webpack.js.org/)
 - [Npm](https://www.npmjs.com/)
 
-## Issues
+## Design 🎨
+
+Design in [Figma](https://www.figma.com/)
+
+## Issues 🚩
 
 The biggest issue with this API is rate limit.
 
-## Installation
+## Installation 📍
 
 ```bash
 npm install
 ```
 
-## Credits
+## Credits 👏
 
 https://www.eventbrite.com/platform/api
