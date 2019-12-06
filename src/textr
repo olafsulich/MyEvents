@@ -1,0 +1,105 @@
+class EventBrite {
+  constructor() {
+    this.authentication = "ALV5ANXJC6K7F5DSHHLE";
+    this.orderby = "date";
+    this.resultBox = document.querySelector(".list");
+    this.errorText = document.querySelector(".content__wrapper__error");
+    this.searchText = document.querySelector(".heading--1");
+  }
+
+  async getEvent(eventName, eventCategory) {
+    try {
+      const eventURL = `http://www.eventbriteapi.com/v3/events/search/?q=${eventName}&sort_by=${this.orderby}&categories=${eventCategory}&token=${this.authentication}`;
+      const eventsResponse = await fetch(eventURL);
+      const eventsData = await eventsResponse.json();
+      console.log(eventsData);
+      return { eventsData };
+    } catch {
+      this.errorText.classList.add("content__wrapper__error-show");
+      this.searchText.classList.add("heading--1-hide");
+    }
+  }
+
+  async getCategoriesEvent() {
+    try {
+      const categoriesURL = `https://www.eventbriteapi.com/v3/categories/?token=${this.authentication}`;
+      const categoriesResponse = await fetch(categoriesURL);
+      const categoriesData = await categoriesResponse.json();
+      return { categoriesData };
+    } catch {
+      this.errorText.classList.add("content__wrapper__error-show");
+      this.searchText.classList.add("heading--1-hide");
+    }
+  }
+
+  displayCategories() {
+    this.getCategoriesEvent()
+      .then(categoriesData => {
+        const categoriesList = categoriesData.categories;
+        const categoriesSelect = document.querySelector(".header__select");
+        categoriesList.forEach(category => {
+          const option = document.createElement("option");
+          option.value = category.id;
+          option.appendChild(document.createTextNode(category.name));
+          categoriesSelect.appendChild(option);
+        });
+      })
+      .catch(() => {
+        this.errorText.classList.add("content__wrapper__error-show");
+        this.searchText.classList.add("heading--1-hide");
+      });
+  }
+
+  displayEvents(events) {
+    const resultBox = document.querySelector(".list");
+    let template = ``;
+    events.forEach(({ url, logo, start: { local }, name, description }) => {
+      template += `
+              <li class="list__item">
+                  <a href="${url}">
+                     <figure class="list__item__box">
+                        <img class="list__item__box__img" src="${
+                          logo !== null ? logo.url : ""
+                        }">
+
+                    </figure>
+                    <article class="list__item__article event__info">
+                         <span class="event__info__date">${local}</span>
+                         <h2 class="event__info__heading">${name.text.substring(
+                           0,
+                           20
+                         )}...</h2>
+                         <p class="event__info__description">${description.text.substring(
+                           0,
+                           40
+                         )}...</p>
+                    </article>
+                  </a>
+                    <button class="likes">
+                        <img class="likes__img" src="./like.svg" alt="Liked" />
+                    </button>
+                </li>
+      `;
+    });
+    resultBox.innerHTML = template;
+  }
+
+  formControll() {
+    const form = document.querySelector(".search__button");
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      const eventName = document.querySelector(".search__input").value;
+      const eventCategory = document.querySelector(".header__select").value;
+      this.getEvent(eventName, eventCategory).then(events => {
+        const eventsList = events.events.events;
+        this.displayEvents(eventsList);
+      });
+    });
+  }
+}
+const event = new EventBrite();
+event.formControll();
+
+const eventOne = new EventBrite();
+eventOne.getEvent();
+eventOne.displayCategories();
