@@ -25,8 +25,8 @@ Design in [Figma](https://www.figma.com/)
 
 ## Issues 🚩
 
-If you have any issues, please let me know in the issue section.
-If you see error message, it's propably becouse API has rate limit. 
+- If you have any issues, please let me know in the issue section.
+- If you see error message, it's propably becouse API has rate limit. 
 
 ## Installation 📍
 
